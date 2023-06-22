@@ -6,3 +6,4 @@ This project mimics a bed and breakfast webpage that clients can use to book ava
   - [chi](https://github.com/go-chi/chi)
   - [scs](https://github.com/alexedwards/scs)
   - [nosurf](https://github.com/justinas/nosurf)
+  - [datepicker](https://github.com/mymth/vanillajs-datepicker)
