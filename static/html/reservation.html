@@ -20,6 +20,11 @@
     .room-image{
       max-width: 50%;
     }
+
+    /* override notie styles here */
+    .notie-container {
+
+    }
   </style>
 </head>
 <body>
@@ -93,8 +98,12 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.3/dist/js/datepicker-full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+  let attention = Prompt();
+
   (() => {
     'use strict'
 
@@ -107,6 +116,8 @@
         if (!form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
+          // notifyModal("Error","Please choose a start and end date","error","Ok")
+          attention.error({title: "Error", msg: "Please choose a start and end date"})
         }
 
         form.classList.add('was-validated')
@@ -118,6 +129,77 @@
   const rangepicker = new DateRangePicker(elem, {
     // ...options
   });
+
+  function notifyModal(title, text, icon, confirmationButtonText){
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      confirmButtonText: confirmationButtonText
+    })
+  }
+
+  function Prompt(){
+    let toast = function(c){
+      const {
+        msg = "",
+        icon = "success",
+        position = "top-end",
+      } = c;
+
+      const Toast = Swal.mixin({
+        toast: true,
+        title: msg,
+        position: position,
+        icon: icon,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({})
+    }
+
+    let success = function(c){
+      const {
+        msg = "",
+        title = "",
+        footer = "",
+      } = c;
+
+      Swal.fire({
+        icon: "success",
+        title: title,
+        text: msg,
+        footer: footer
+      })
+    }
+
+    let error = function(c){
+      const {
+        msg = "",
+        title = "",
+        footer = "",
+      } = c;
+
+      Swal.fire({
+        icon: "error",
+        title: title,
+        text: msg,
+        footer: footer
+      })
+    }
+
+    return {
+      toast: toast,
+      success: success,
+      error: error,
+    }
+  }
 
 </script>
 </body>
