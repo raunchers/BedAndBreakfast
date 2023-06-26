@@ -1,0 +1,51 @@
+{{template "base" .}}
+
+{{define "content"}}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="/static/images/majors-suite.png" class="img-fluid img-thumbnail rounded mx-auto d-block room-image" alt="Room image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center mt-4">Major's Suite</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <a id="check-availability-btn" class="btn btn-success" href="#!">Check Availability</a>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+    <script>
+        document.getElementById("check-availability-btn").addEventListener("click", function(){
+            let html = `
+                <div class="container">
+                  <div class="row">
+                      <div class="col">
+                          <form id="check-availability-form" action="#" method="GET" class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="row" id="reservation-dates-modal">
+                                        <div class="col">
+                                            <input required type="text" class="form-control" name="start" id="start" placeholder="Check-in Date">
+                                        </div>
+                                        <div class="col">
+                                            <input required type="text" class="form-control" name="end" id="end" placeholder="Check-out Date">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+                </div>
+                `
+            attention.custom({title: "Arrival and depature dates", msg: html})
+        })
+    </script>
+{{end}}
